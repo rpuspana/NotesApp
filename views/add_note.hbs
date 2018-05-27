@@ -1,0 +1,55 @@
+<div class="container">
+    <form id="myForm">
+        <div class="form_item">
+            <label>Owner of note:</label>
+            <input type="text" id="owner" name="owner">
+        </div>
+
+        <div class="form_item">
+            <label>Title of the note:</label>
+            <input type="text" id="title" name="title">
+        </div>
+
+        <div class="form_item">
+            <label>Message:</label>
+            <textarea id="message" name="message"></textarea>
+        </div>
+        <button type="submit"> Add note </button>
+    </form>
+</div>
+
+{{!-- set up ajax request that is getting sent to the Express server on port 3000 --}}
+<script>
+    // e = event
+    $('#myForm').on('submit', (e) => {
+        // default behaviour is to reload the page. Must stop this
+        e.preventDefault();
+
+        // get the data from the form
+        const jsonData = {
+            owner: $('#owner').val(),
+            title: $('#title').val(),
+            message: $('#message').val()
+        }
+
+        // ajax POST request to the Express server
+        $.ajax({
+            type: 'POST',
+            url: '/api/add_note',
+            data: JSON.stringify(jsonData),
+            contentType: 'application/json',
+
+            // all good, it inserted everything
+            success: (data, status) => {
+
+                // redirect to Home
+                window.location.href = "/";
+            },
+
+            // if something goes wrong
+            error: () => {
+                alert(`Problem when sending form data (JSON) from api/add_note`)
+            }
+        })
+    })
+</script>

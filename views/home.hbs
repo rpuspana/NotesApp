@@ -1,0 +1,59 @@
+ <div class="container">
+
+    {{!-- loop through the object that has the messagess --}}
+    {{#each articles}}
+
+        <div class="msg_item">
+            <div class="header">
+                <div>
+                    <strong>From:</strong>{{this.owner}}</div>
+                <a href="/edit_note/{{this.id}}">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                </a>
+                <div class="delete" data-id="{{this.id}}">x</div>
+            </div>
+            <div class="contents">
+                <div class="title">{{this.title}}</div>
+                <div>
+                    {{this.message}}
+                </div>
+            </div>
+            <div class="bottom"></div>
+        </div>
+
+    {{/each}}
+
+    <a class="add_note" href="/add_note">Add a note</a>
+
+</div>
+
+{{!-- listen for a click event inside hte delete div --}}
+<script>
+    $('.delete').on('click', function() {
+
+        // this = DOM object representing the delete <div>
+
+        // get the second ancestor of the delete div = msg_item div
+        const element = $(this).parents().eq(1);
+
+        // grab the data attribute and the attribute is called data-id
+        const deleteId = $(this).data("id");
+
+        // ajax requset to Express server
+        $.ajax({
+            type: 'DELETE',
+            url: `/api/delete/${deleteId}`,
+            contentType: "application/json",
+
+            // when it receives the ok from the server
+            success: (data) => {
+                element.remove();
+            },
+
+            // when it receives an error from the server
+            error: () => {
+                alert(`error after calling /api/delete/${deleteId}`);
+            }
+        });
+    });
+</script>

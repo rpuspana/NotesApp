@@ -1,0 +1,11 @@
+npm init = create an package.json
+
+impm install nodeModuleName --save 
+	= list the dependency nodeModuleName in the package.json file so it can be installed when someone downloads the project from github OR
+	  when you delete by accident the node_modules folder
+	  
+npm install = install all the dependencies listed in the package.json file - dependencies array
+
+nodemon sourceToWatch = restart app evertime sourceToWatch is changed
+
+json-server --watch db.json --port 3004 = start the json-server node package
