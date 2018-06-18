@@ -14,9 +14,7 @@ App that helps you take notes/reminders. Your notes/reminders are stored in the 
 
 - body-parser (npm module) - parse json from request body
 
-- express-handlebars (npm module) - dynamic HTML templating engine
-
-	*.hbs - handlebars HTML templates
+- express-handlebars (npm module) - client-side templating engine
 
 - node-fetch (npm module) - A light-weight module that brings window.fetch to Node.js
 
